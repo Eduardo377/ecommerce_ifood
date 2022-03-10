@@ -17,9 +17,10 @@ public class Departamento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)  // Indico que o valor é gerado e gerenciado pelo BD ( e o identity torna isso indepentende da implementação)
     private Integer numero;
 	
-	@Column(name = "nome", length = 50, nullable = false)
-	private String  nome;
 	
+	@Column(name = "nome", length = 50, nullable = false, columnDefinition = "TEXT")
+	private String  nome;
+
 	@Column(name = "andar")
 	private Integer andar;
 	
