@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "produto")
 public class Produto {
@@ -34,6 +36,7 @@ public class Produto {
 	
 	@ManyToOne					// esta anotação indica que há uma relação N:1 com Departamento
 	@JoinColumn(name = "num_depto") // como o nome da coluna que é FK é diferente do nome da PK de Departamento, então preciso explicitar
+	@JsonIgnoreProperties("listaProdutos")
 	private Departamento depto;
 
 	public Integer getCodigo() {
