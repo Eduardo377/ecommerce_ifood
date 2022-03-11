@@ -21,8 +21,5 @@ public class ProdutoController {
 		return (List<Produto>)dao.findAll();
 	}
 
-	@GetMapping("/produto1")
-	public Produto recupearProduto() {
-		return dao.findById(1).get();
-	}
+
 }
