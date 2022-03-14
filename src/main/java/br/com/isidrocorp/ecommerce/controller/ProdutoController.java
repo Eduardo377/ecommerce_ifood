@@ -23,7 +23,7 @@ public class ProdutoController {
 	@GetMapping("/produtos")
 	public List<Produto> recuperarTodos(){
 		// qual o objetivo aqui? Recuperar todos os produtos do banco
-		return (List<Produto>)dao.findAll();
+		return (List<Produto>)dao.recuperarTudaoComUmaUnicaQuery();
 	}
 
 	
