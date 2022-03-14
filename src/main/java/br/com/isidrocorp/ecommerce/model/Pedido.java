@@ -1,6 +1,7 @@
 package br.com.isidrocorp.ecommerce.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -38,6 +40,10 @@ public class Pedido {
 	@JoinColumn(name = "num_cliente")
 	@JsonIgnoreProperties("listaPedidos")
 	private Cliente cliente;
+	
+	@OneToMany(mappedBy = "pedido")
+	@JsonIgnoreProperties("pedido")
+	private List<ItemPedido> itens;
 
 	public Integer getNumero() {
 		return numero;
@@ -86,6 +92,15 @@ public class Pedido {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
+
+	public List<ItemPedido> getItens() {
+		return itens;
+	}
+
+	public void setItens(List<ItemPedido> itens) {
+		this.itens = itens;
+	}
+	
 	
 	
 
