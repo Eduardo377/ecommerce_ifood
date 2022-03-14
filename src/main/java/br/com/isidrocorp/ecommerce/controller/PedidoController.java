@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.isidrocorp.ecommerce.dao.PedidoDAO;
+import br.com.isidrocorp.ecommerce.dto.Faturamento;
 import br.com.isidrocorp.ecommerce.model.Pedido;
 
 @RestController
@@ -18,6 +19,11 @@ public class PedidoController {
 	@GetMapping("/pedidos")
 	public List<Pedido> recuperarTodos(){
 		return (List<Pedido>)dao.findAll();
+	}
+	
+	@GetMapping("/faturamento")
+	public List<Faturamento> recuperarFaturamento(){
+		return dao.recuperarFaturamentoPorAno();
 	}
 
 }

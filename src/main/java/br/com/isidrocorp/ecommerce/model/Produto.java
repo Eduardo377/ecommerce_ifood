@@ -38,6 +38,26 @@ public class Produto {
 	@JoinColumn(name = "num_depto") // como o nome da coluna que é FK é diferente do nome da PK de Departamento, então preciso explicitar
 	@JsonIgnoreProperties("listaProdutos")
 	private Departamento depto;
+	
+	
+	public Produto() {
+		// nao faz nadica de nada!!!
+	}
+
+	public Produto(Integer codigo, String nome, String descricao, Double preco, Integer qtdEstoque, String linkFoto,
+			       Integer numeroDepto, String nomeDepto, Integer andarDepto) {
+		super();
+		this.codigo = codigo;
+		this.nome = nome;
+		this.descricao = descricao;
+		this.preco = preco;
+		this.qtdEstoque = qtdEstoque;
+		this.linkFoto = linkFoto;
+		this.depto = new Departamento();
+		this.depto.setNumero(numeroDepto);
+		this.depto.setNome(nomeDepto);
+		this.depto.setAndar(andarDepto);
+	}
 
 	public Integer getCodigo() {
 		return codigo;
