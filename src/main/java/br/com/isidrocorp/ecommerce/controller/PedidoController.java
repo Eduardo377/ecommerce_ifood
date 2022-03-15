@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.isidrocorp.ecommerce.dao.PedidoDAO;
@@ -21,9 +22,9 @@ public class PedidoController {
 		return (List<Pedido>)dao.findAll();
 	}
 	
-	@GetMapping("/faturamento")
-	public List<Faturamento> recuperarFaturamento(){
-		return dao.recuperarFaturamentoPorAno();
+	@GetMapping("/faturamento/{ano}")
+	public List<Faturamento> recuperarFaturamento(@PathVariable int ano){
+		return dao.recuperarFaturamentoPorAno(ano);
 	}
 
 }

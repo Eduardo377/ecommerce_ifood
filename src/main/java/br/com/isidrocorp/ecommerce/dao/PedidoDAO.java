@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import br.com.isidrocorp.ecommerce.dto.Faturamento;
 import br.com.isidrocorp.ecommerce.model.Pedido;
@@ -20,7 +21,8 @@ public interface PedidoDAO extends CrudRepository<Pedido, Integer> {
 			+ " br.com.isidrocorp.ecommerce.dto.Faturamento( month(pedido.data) , sum(pedido.valorTotal) ) "
 			+ " FROM "
 			+ " Pedido as pedido "
+			+ " WHERE year(pedido.data) = :ano"
 			+ " GROUP BY month(pedido.data) ")
-	public List<Faturamento> recuperarFaturamentoPorAno();
+	public List<Faturamento> recuperarFaturamentoPorAno(@Param("ano") int ano);
 	
 }
