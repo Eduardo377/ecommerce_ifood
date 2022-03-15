@@ -1,7 +1,10 @@
 package br.com.isidrocorp.ecommerce.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +17,7 @@ import br.com.isidrocorp.ecommerce.util.Mensagem;
 public class PedidoController {
 	
 	@Autowired
+	@Qualifier("dia-a-dia")
 	private IPedidoService service;
 	
 	@PostMapping("/pedidos")
@@ -25,6 +29,17 @@ public class PedidoController {
 		return ResponseEntity.status(400).body(new Mensagem(9876, "Dados invalidos para a estrutura pedido"));		
 	}
 	
+	@DeleteMapping("/pedidos/{id}")
+	public ResponseEntity<?> removerPedido(@PathVariable Integer id){
+		if (service.removerPedido(id)) {
+			return ResponseEntity.ok(new Mensagem(1000,"Pedido removido com sucesso"));
+		}
+		return ResponseEntity.badRequest().body(new Mensagem(9845,"Erro ao remover pedido"));
+	}
+	
+	
+	// mais um endpoint para remover o Pedido
+	// queremos verificar se vai remover só o item ou tb o produto
 	
 	
 //	@Autowired
