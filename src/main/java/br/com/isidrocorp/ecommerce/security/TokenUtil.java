@@ -1,16 +1,21 @@
 package br.com.isidrocorp.ecommerce.security;
 
 import java.security.Key;
+import java.util.Collections;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 
 import br.com.isidrocorp.ecommerce.model.Usuario;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+
 
 public class TokenUtil {
 	// puro preciosismo para clean code
@@ -52,8 +57,26 @@ public class TokenUtil {
 	
 	public static Authentication validate(HttpServletRequest request) {
 		// extrair o token do cabeçalho
+		String token = request.getHeader(HEADER);
+		token = token.replace(PREFIX, ""); // removi o prefixo "Bearer " do token
 		// extrair as infos relevantes que eu quero do token
+		
+		Jws<Claims> jwsClaims = Jwts.parserBuilder().setSigningKey(SECRET_KEY.getBytes())
+				                                    .build()
+				                                    .parseClaimsJws(token);
+		
+		String username = jwsClaims.getBody().getSubject();
+		String issuer   = jwsClaims.getBody().getIssuer();
+		Date   expira   = jwsClaims.getBody().getExpiration();
+		
 		// se for válido, retorno um objeto do tipo Authentication
+		if (isSubjectValid(username) && isEmissorValid(issuer) && isExpirationValid(expira)) {
+			// eu preciso criar um objeto de Autenticação
+			// o objeto é bem completo, onde podemos incluir o nível de autorização,
+			// qual a lista de endpoints que o usuário pode acessar e assim por diante... 
+			// nosso caso é mais simples.. pois não estamos tratando endpoints específicos para diferentes usuários
+			return new UsernamePasswordAuthenticationToken(username, null, Collections.emptyList());
+		}
 	
 		return null; 
 	}
