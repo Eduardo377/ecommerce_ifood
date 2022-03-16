@@ -2,6 +2,7 @@ package br.com.isidrocorp.ecommerce.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +14,6 @@ import br.com.isidrocorp.ecommerce.model.Pedido;
 @Qualifier("desconto")
 public class PedidoServiceDesconto implements IPedidoService {
 
-	
 	@Autowired
 	private PedidoDAO dao;
 	
