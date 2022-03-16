@@ -1,0 +1,37 @@
+package br.com.isidrocorp.ecommerce.security;
+
+import java.io.IOException;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.filter.OncePerRequestFilter;
+
+// essa definição indica que o filtro será executado a cada nova requisição (ou seja, não haverá nenhum tipo de "cache"
+// de autenticações para isso)
+public class EcommerceFilter extends OncePerRequestFilter{
+
+	@Override
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+			throws ServletException, IOException {
+	// aqui vem a lógica de autorizar ou não
+		
+		// o que eu preciso fazer num filtro?
+		// validar minha lógica de autrização
+		
+		System.out.println("Requisicao Passando pelo filtro...");
+		
+		// encaminhar a requisição pra frente
+		
+		
+		filterChain.doFilter(request, response);		
+	}
+	
+	
+
+}

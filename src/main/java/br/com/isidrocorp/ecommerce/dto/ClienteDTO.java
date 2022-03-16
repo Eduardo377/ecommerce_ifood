@@ -59,7 +59,6 @@ public class ClienteDTO {
 	
 	public static ClienteDTO fromCliente(Cliente c) {
 		return new ClienteDTO(c.getNumero(), c.getNome(), c.getCpf(), c.getEmail(), c.getTelefone());
-	}
-	
+	}	
 
 }
