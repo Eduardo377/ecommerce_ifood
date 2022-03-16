@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.isidrocorp</groupId>
-	<artifactId>ecommerce</artifactId>
+	<artifactId>ecommerce-ifood</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ecommerce</name>
 	<description>API de Ecommerce SpringBoot</description>

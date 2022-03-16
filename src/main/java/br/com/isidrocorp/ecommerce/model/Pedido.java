@@ -3,6 +3,7 @@ package br.com.isidrocorp.ecommerce.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -41,7 +42,7 @@ public class Pedido {
 	@JsonIgnoreProperties("listaPedidos")
 	private Cliente cliente;
 	
-	@OneToMany(mappedBy = "pedido")
+	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("pedido")
 	private List<ItemPedido> itens;
 

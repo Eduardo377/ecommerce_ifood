@@ -6,10 +6,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import br.com.isidrocorp.ecommerce.dto.Faturamento;
-import br.com.isidrocorp.ecommerce.model.Pedido;
+import br.com.isidrocorp.ecommerce.model.Cliente;
 
-public interface PedidoDAO extends CrudRepository<Pedido, Integer> {
+public interface ClienteDAO extends CrudRepository<Cliente, Integer> {
 
 	
 	// agora eu quero uma query customizadaaaaaaça (onde EU escrevo o SQL)
@@ -22,6 +21,5 @@ public interface PedidoDAO extends CrudRepository<Pedido, Integer> {
 			+ " FROM "
 			+ " Pedido as pedido where year(pedido.data) = :ano"
 			+ " GROUP BY month(pedido.data) ")
-	public List<Faturamento> recuperarFaturamentoPorAno(@Param ("ano") int ano );
+	public List<Cliente> recuperarFaturamentoPorAno(@Param ("ano") int ano );
 	
-}
