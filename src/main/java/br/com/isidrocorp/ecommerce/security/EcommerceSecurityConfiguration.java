@@ -28,6 +28,8 @@ public class EcommerceSecurityConfiguration extends WebSecurityConfigurerAdapter
 					  .antMatchers(HttpMethod.GET, "/produtos").permitAll()
 					  .antMatchers(HttpMethod.GET, "/produtos/*").permitAll()
 					  .antMatchers(HttpMethod.POST, "/login").permitAll()
+					  .antMatchers(HttpMethod.POST, "/usuarios*").permitAll()
+					  .antMatchers(HttpMethod.PUT, "/usuarios/*").permitAll()
 					  
 					  // qualquer outra requisição que "foge" aos padrões especificados, precisa ser autenticada
 					  .anyRequest().authenticated().and().cors();
