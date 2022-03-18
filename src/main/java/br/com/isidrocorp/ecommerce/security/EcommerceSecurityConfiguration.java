@@ -28,6 +28,8 @@ public class EcommerceSecurityConfiguration extends WebSecurityConfigurerAdapter
 					  .antMatchers(HttpMethod.GET, "/produtos").permitAll()
 					  .antMatchers(HttpMethod.GET, "/produtos/*").permitAll()
 					  .antMatchers(HttpMethod.POST, "/login").permitAll()
+					  .antMatchers(HttpMethod.GET,"/usuarios").permitAll()
+					  .antMatchers(HttpMethod.GET,"/usuarios/*").permitAll()
 					  .antMatchers(HttpMethod.POST, "/usuarios*").permitAll()
 					  .antMatchers(HttpMethod.PUT, "/usuarios/*").permitAll()
 					  

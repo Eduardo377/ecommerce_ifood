@@ -1,5 +1,7 @@
 package br.com.isidrocorp.ecommerce.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +22,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
 	public Token gerarTokenDeUsuarioLogado(UsuarioLoginDTO dadosLogin) {
 		// TODO Auto-generated method stub
 		Usuario user = dao.findByUsernameOrEmail(dadosLogin.getUsername(), dadosLogin.getEmail());
-		try {			
+		try {
 
 			if (user != null) { // usuario existe no banco
 
@@ -28,10 +30,10 @@ public class UsuarioServiceImpl implements IUsuarioService {
 				// criptografarmos
 				// a senha recebida e comparar os valores criptografados
 				String senhaLogin = EcommerceCrypto.encrypt(dadosLogin.getSenha());
-				
-				System.out.println("Senha login = "+senhaLogin);
-				System.out.println("Senha user  = "+user.getSenha());
-			
+
+				System.out.println("Senha login = " + senhaLogin);
+				System.out.println("Senha user  = " + user.getSenha());
+
 				if (senhaLogin.equals(user.getSenha())) {
 					return new Token(TokenUtil.createToken(user));
 				}
@@ -72,4 +74,21 @@ public class UsuarioServiceImpl implements IUsuarioService {
 		return null;
 	}
 
+	@Override
+	public List<Usuario> recuperarTodos() {
+		// TODO Auto-generated method stub
+		return (List<Usuario>) dao.findAll();
+	}
+
+	@Override
+	public Usuario recuperarDetalhes(Integer id) {
+		// TODO Auto-generated method stub
+		try {
+			if (id <= 0)
+				throw new RuntimeException("ID invalido para consulta");
+			return dao.findById(id).orElse(null);
+		} catch (Exception ex) {
+			throw new RuntimeException(ex.toString() + " - "+ex.getMessage());
+		}
+	}
 }
